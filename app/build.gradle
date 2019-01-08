@@ -64,6 +64,7 @@ dependencies {
 
     implementation deps.koin.viewmodelx
 
+    implementation deps.okhttp.core
     implementation deps.retrofit.library
     implementation deps.retrofit.gson
     implementation deps.retrofit.coroutines
@@ -74,4 +75,9 @@ dependencies {
     kapt deps.glide.compiler
 
     kapt deps.databinding.compiler
+
+    testImplementation deps.testing.junit
+    testImplementation deps.koin.test
+    testImplementation deps.okhttp.mockwebserver
+    testImplementation deps.retrofit.mock
 }

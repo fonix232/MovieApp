@@ -15,11 +15,15 @@ class MovieViewModel : BaseViewModel() {
     private val repoMovie = repo.movie
     val movie: LiveData<Movie> = MediatorLiveData()
     val ratings: LiveData<List<Rating>> = MediatorLiveData()
+    val actors: LiveData<List<String>> = MediatorLiveData()
 
     init {
         (ratings as MediatorLiveData).postValue(listOf())
+        (actors as MediatorLiveData).postValue(listOf())
+
         (movie as MediatorLiveData).addSource(repoMovie) { movie.postValue(it) }
         (ratings as MediatorLiveData).addSource(movie) { movie -> ratings.postValue(movie?.ratings) }
+        (actors as MediatorLiveData).addSource(movie) { movie -> actors.postValue(movie.actors?.split(',')) }
     }
 
     lateinit var navController: NavController

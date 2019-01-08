@@ -7,14 +7,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import me.fonix232.common.ui.fragment.BaseFragment
 import me.fonix232.movieapp.R
 import me.fonix232.movieapp.bindings.MovieFragmentBinding
-import me.fonix232.movieapp.ui.adapter.MovieListAdapter
+import me.fonix232.movieapp.ui.adapter.ActorAdapter
 import me.fonix232.movieapp.ui.adapter.RatingsAdapter
 import me.fonix232.movieapp.viewmodel.MovieViewModel
 
 class MovieFragment :
     BaseFragment<MovieViewModel, MovieFragmentBinding>(MovieViewModel::class, R.layout.fragment_movie) {
 
-    private lateinit var adapter: RatingsAdapter
+    private lateinit var ratingsAdapter: RatingsAdapter
+    private lateinit var actorsAdapter: ActorAdapter
 
     override fun afterBind(binding: MovieFragmentBinding) {
         super.afterBind(binding)
@@ -29,8 +30,10 @@ class MovieFragment :
             binding.movie = it
         })
 
-        adapter = RatingsAdapter(viewModel.ratings, this)
-        binding.ratings.adapter = adapter
+        ratingsAdapter = RatingsAdapter(viewModel.ratings, this)
+        binding.ratings.adapter = ratingsAdapter
         binding.ratings.layoutManager = LinearLayoutManager(context)
+
+        actorsAdapter = ActorAdapter(viewModel.actors, this)
     }
 }
